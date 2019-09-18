@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>All cars list</title>
+    <title>Delete Car</title>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
@@ -37,50 +37,21 @@
     <div class="row">
         <div class="col-4" style="background-color: #7abaff">
             <p>Hello <span th:text="${name}"></span></p>
-
+            <form th:action="@{/delete-car}" th:method="post" th:object="${oldCar}">
             <table th:class="table">
                 <tr th:each="car: ${cars}">
                     <td th:text="${car.id}"></td>
                     <td th:text="${car.mark}"></td>
                     <td th:text="${car.model}"></td>
-
+                    <td><input type="radio" class="form-check-input" th:field="*{id}" th:value="${car.id}"></td>
                 </tr>
-            </table>
-            <br/>
-            <form th:action="@{/add-car}" th:method="post" th:object="${newCar}">
-                <table>
-                    <tr>
-                        <td>Marka:</td>
-                        <td><input type="text" th:field="*{mark}"></td>
-                    </tr>
-                    <tr>
-                        <td>Model:</td>
-                        <td><input type="text" th:field="*{model}"></td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>
-                            <button type="submit" class="btn btn-outline-primary">Dodaj pojazd</button>
-                        </td>
-                    </tr>
-
-                </table>
-            </form>
-            <br/>
-            <table>
                 <tr>
-                    <td>
-                        <form th:action="@{/delete-car}" th:method="get">
-                            <button type="submit" class="btn btn-outline-danger">Usuń pojazd</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form th:action="@{/modify-car}" th:method="get">
-                            <button type="submit" class="btn btn-outline-warning">Edytuj pojazd</button>
-                        </form>
-                    </td>
+                    <td>&nbsp;</td>
+                    <td colspan="3"><button type="submit" class="btn btn-outline-danger">Usuń pojazd</button></td>
                 </tr>
             </table>
+            <br/>
+            </form>
             <br/>
         </div><!-- column -->
     </div><!-- row -->

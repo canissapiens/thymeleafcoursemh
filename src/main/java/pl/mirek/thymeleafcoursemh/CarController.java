@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import pl.mirek.thymeleafcoursemh.dto.CarDto;
 import pl.mirek.thymeleafcoursemh.service.CarService;
 
 @Controller
@@ -16,6 +17,16 @@ public class CarController {
     @Autowired
     public CarController(CarService carService) {
         this.carService = carService;
+    }
+
+    /*
+     *
+     * !!! server.port=8084 !!!
+     *
+     * */
+    @GetMapping(value = "/")
+    public String home() {
+        return "redirect:/cars";
     }
 
     @GetMapping(value = "/car")
@@ -35,10 +46,37 @@ public class CarController {
 
     @PostMapping(value = "/add-car")
     public String addCar(@ModelAttribute Car newCar) {
-        carService.addCar(newCar);
+        if (!newCar.getMark().equals("") && !newCar.getModel().equals("")) {
+            carService.addCar(newCar);
+        }
         return "redirect:/cars";
     }
 
+    @GetMapping(value = "/delete-car")
+    public String deleteCar(Model model) {
+        model.addAttribute("name", "Mirek");
+        model.addAttribute("cars", carService.getCarsForDisplay());
+        model.addAttribute("oldCar", new CarDto());
+        return "deletecar";
+    }
 
+    @PostMapping(value = "/delete-car")
+    public String doDeleteCar(@ModelAttribute CarDto carDto) {
+        carService.deleteCar(carDto);
+        return "redirect:cars";
+    }
 
+    @GetMapping(value = "/modify-car")
+    public String modifyCar(Model model) {
+        model.addAttribute("name", "Mirek");
+        model.addAttribute("cars", carService.getCarsForDisplay());
+        model.addAttribute("oldCar", new CarDto());
+        return "modifycar";
+    }
+
+    @PostMapping(value = "/modify-car")
+    public String doModifyCar(@ModelAttribute CarDto carDto) {
+        carService.modifyCar(carDto);
+        return "redirect:cars";
+    }
 }

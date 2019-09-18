@@ -45,4 +45,19 @@ public class CarService {
         }
         return output;
     }
+
+    public void deleteCar(CarDto carDto) {
+        repository.getCars().remove(carDto.id);
+    }
+
+    public void modifyCar(CarDto carDto) {
+        Car car = this.getCarById(carDto.id);
+        if (!carDto.mark.equals("")) {
+            car.setMark(carDto.mark);
+        }
+
+        if (!carDto.model.equals("")) {
+            car.setModel(carDto.model);
+        }
+    }
 }
