@@ -34,17 +34,41 @@
 </head>
 <body>
 <main role="main" class="container">
-    <p>Hello <span th:text="${name}"></span></p>
+    <div class="row">
+        <div class="col-4" style="background-color: #7abaff">
+            <p>Hello <span th:text="${name}"></span></p>
 
-    <table>
-        <tr th:each="car: ${cars}">
-            <td th:text="${car.id}"></td>
-            <td th:text="${car.mark}"></td>
-            <td th:text="${car.model}"></td>
+            <table th:class="table">
+                <tr th:each="car: ${cars}">
+                    <td th:text="${car.id}"></td>
+                    <td th:text="${car.mark}"></td>
+                    <td th:text="${car.model}"></td>
 
-        </tr>
-    </table>
-    <!-- <p>For complete car list go to: <a href="/cars">/cars</a></p> -->
+                </tr>
+            </table>
+            <br/>
+            <form th:action="@{/add-car}" th:method="post" th:object="${newCar}">
+                <table>
+                    <tr>
+                        <td>Marka:</td>
+                        <td><input type="text" th:field="*{mark}"></td>
+                    </tr>
+                    <tr>
+                        <td>Model:</td>
+                        <td><input type="text" th:field="*{model}"></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><button type="submit" class="btn btn-outline-primary">Dodaj pojazd</button></td>
+                    </tr>
+
+                </table>
+            </form>
+            <br/>
+        </div><!-- column -->
+    </div><!-- row -->
+
+
 </main>
 <script src="js/jquery-3.3.1.slim.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
