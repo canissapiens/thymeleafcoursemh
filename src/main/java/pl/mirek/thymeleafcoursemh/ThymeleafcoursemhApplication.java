@@ -25,6 +25,6 @@ public class ThymeleafcoursemhApplication {
     @EventListener(ApplicationReadyEvent.class)
     public void applicationInitialize() {
         carService.initCarBase();
+        System.out.println("---> STARTED");
     }
-
 }

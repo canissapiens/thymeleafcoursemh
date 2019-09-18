@@ -6,8 +6,8 @@ import pl.mirek.thymeleafcoursemh.Car;
 import pl.mirek.thymeleafcoursemh.dto.CarDto;
 import pl.mirek.thymeleafcoursemh.repository.CarRepository;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class CarService {
